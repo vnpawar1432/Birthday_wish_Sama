@@ -1,0 +1,3259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Happy Birthday My Love 💖</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+    <!-- FontAwesome -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Three.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+    <style>
+        * {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            overflow-x: hidden;
+        }
+
+        .font-cursive {
+            font-family: 'Great Vibes', cursive;
+        }
+
+        .font-serif-romantic {
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* Glassmorphism */
+
+        .glass-card {
+            background: rgba(26, 11, 22, 0.55);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 182, 193, 0.2);
+            box-shadow: 0 8px 32px rgba(255, 105, 180, 0.15);
+        }
+
+        .glass-card-hover {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .glass-card-hover:hover {
+            transform: translateY(-8px) scale(1.02);
+            border-color: rgba(255, 182, 193, 0.5);
+            box-shadow: 0 15px 35px rgba(255, 105, 180, 0.3);
+        }
+
+        /* Glow */
+
+        .glow-text {
+            text-shadow:
+                0 0 12px rgba(255, 182, 193, 0.8),
+                0 0 25px rgba(236, 72, 153, 0.5);
+        }
+
+        .glow-gold {
+            text-shadow:
+                0 0 10px rgba(251, 191, 36, 0.8),
+                0 0 20px rgba(245, 158, 11, 0.5);
+        }
+
+        /* Buttons */
+
+        .btn-rose-gradient {
+            background: linear-gradient(
+                135deg,
+                #f43f5e 0%,
+                #ec4899 50%,
+                #d946ef 100%
+            );
+
+            box-shadow: 0 4px 20px rgba(244, 63, 94, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .btn-rose-gradient:hover {
+            box-shadow: 0 6px 28px rgba(244, 63, 94, 0.7);
+            transform: translateY(-2px);
+        }
+
+        /* Scrollbar */
+
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #0f0510;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #ec4899;
+            border-radius: 10px;
+        }
+
+        /* Candle flame */
+
+        .flame {
+            width: 16px;
+            height: 26px;
+
+            background:
+                radial-gradient(
+                    ellipse at bottom,
+                    #fef08a 0%,
+                    #f97316 60%,
+                    transparent 100%
+                );
+
+            border-radius: 50% 50% 20% 20%;
+
+            animation:
+                flicker 0.15s infinite alternate ease-in-out;
+
+            box-shadow:
+                0 0 15px #f97316,
+                0 0 30px #fef08a;
+        }
+
+        @keyframes flicker {
+            0% {
+                transform: scale(1) rotate(-2deg);
+                opacity: 0.9;
+            }
+
+            100% {
+                transform: scale(1.15) rotate(2deg);
+                opacity: 1;
+            }
+        }
+
+        /* Countdown pulse */
+
+        @keyframes pulse-ring {
+            0% {
+                transform: scale(0.95);
+                opacity: 0.6;
+            }
+
+            50% {
+                transform: scale(1.05);
+                opacity: 0.9;
+            }
+
+            100% {
+                transform: scale(0.95);
+                opacity: 0.6;
+            }
+        }
+
+        .pulse-romantic {
+            animation: pulse-ring 4s infinite ease-in-out;
+        }
+
+        /* Image loading */
+
+        .memory-image {
+            transition:
+                transform 0.7s ease,
+                filter 0.4s ease;
+        }
+
+        .memory-image:hover {
+            filter: brightness(1.08);
+        }
+
+        /* Typewriter */
+
+        #typewriterText {
+            white-space: normal;
+        }
+
+        /* Mobile */
+
+        @media (max-width: 640px) {
+            .hero-title {
+                font-size: 3.2rem;
+            }
+        }
+    </style>
+</head>
+
+
+<body
+    class="bg-[#0b030e] text-rose-100 min-h-screen overflow-x-hidden
+           selection:bg-rose-500 selection:text-white relative">
+
+
+    <!-- =========================================================
+         BACKGROUND CANVAS
+    ========================================================== -->
+
+    <canvas
+        id="canvas3d"
+        class="fixed top-0 left-0 w-full h-full pointer-events-none z-0">
+    </canvas>
+
+    <!-- Fireworks -->
+
+    <canvas
+        id="fireworksCanvas"
+        class="fixed top-0 left-0 w-full h-full
+               pointer-events-none z-40 hidden">
+    </canvas>
+
+
+    <!-- Ambient light -->
+
+    <div
+        class="fixed top-10 left-10 w-72 h-72
+               bg-rose-600/20 rounded-full blur-[120px]
+               pointer-events-none">
+    </div>
+
+    <div
+        class="fixed bottom-10 right-10 w-96 h-96
+               bg-purple-600/20 rounded-full blur-[140px]
+               pointer-events-none">
+    </div>
+
+
+    <!-- =========================================================
+         AUDIO
+         
+         IMPORTANT:
+         The MP3 must be inside:
+         assets/perfect.mp3
+    ========================================================== -->
+
+    <audio
+        id="birthdayAudio"
+        loop
+        preload="auto">
+
+        <source
+            src="assets/perfect.mp3"
+            type="audio/mpeg">
+
+        Your browser does not support audio.
+    </audio>
+
+
+    <!-- =========================================================
+         HEADER
+    ========================================================== -->
+
+    <header
+        class="fixed top-0 left-0 w-full z-30
+               p-4 md:p-6
+               flex justify-between items-center
+               glass-card
+               border-b border-rose-500/20
+               bg-opacity-40
+               backdrop-blur-md">
+
+        <div class="flex items-center space-x-3">
+
+            <div
+                class="w-10 h-10 rounded-full
+                       bg-gradient-to-tr from-pink-500 to-rose-600
+                       flex items-center justify-center
+                       text-white shadow-lg animate-pulse">
+
+                <i class="fa-solid fa-heart text-lg"></i>
+
+            </div>
+
+            <div>
+
+                <span
+                    class="text-xl md:text-2xl
+                           font-cursive
+                           text-rose-300
+                           tracking-wider
+                           glow-text">
+
+                    Forever Yours
+
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <!-- Music button -->
+
+        <button
+            id="musicBtn"
+            onclick="toggleMusic()"
+            class="flex items-center space-x-2
+                   px-4 py-2
+                   rounded-full
+                   glass-card
+                   hover:bg-rose-500/20
+                   border border-rose-400/30
+                   text-rose-200
+                   text-xs md:text-sm
+                   font-medium
+                   transition duration-300">
+
+            <i
+                id="musicIcon"
+                class="fa-solid fa-music text-rose-400">
+            </i>
+
+            <span id="musicText">
+                Play My Song
+            </span>
+
+        </button>
+
+    </header>
+
+
+    <!-- =========================================================
+         MAIN
+    ========================================================== -->
+
+    <main
+        class="relative z-10
+               pt-28 pb-20
+               px-4 md:px-8
+               max-w-6xl mx-auto
+               space-y-24">
+
+
+        <!-- =====================================================
+             HERO
+        ====================================================== -->
+
+        <section
+            class="min-h-[80vh]
+                   flex flex-col
+                   justify-center
+                   items-center
+                   text-center
+                   space-y-8
+                   py-10">
+
+            <div
+                class="inline-flex items-center space-x-2
+                       px-4 py-2
+                       rounded-full
+                       glass-card
+                       border border-rose-400/30
+                       text-rose-300
+                       text-sm
+                       font-medium
+                       animate-bounce">
+
+                <i class="fa-solid fa-sparkles text-amber-300"></i>
+
+                <span>
+                    To My Beautiful Sunshine On Her Birthday
+                </span>
+
+            </div>
+
+
+            <h1
+                class="text-5xl md:text-7xl lg:text-8xl
+                       font-serif-romantic
+                       font-bold
+                       tracking-tight
+                       text-transparent
+                       bg-clip-text
+                       bg-gradient-to-r
+                       from-rose-200
+                       via-pink-300
+                       to-amber-200
+                       glow-text
+                       leading-tight">
+
+                Happy Birthday,
+
+                <br>
+
+                <span
+                    class="font-cursive
+                           text-6xl
+                           md:text-8xl
+                           lg:text-9xl
+                           text-rose-400
+                           font-normal">
+
+                    My Dream Come True
+
+                </span>
+
+            </h1>
+
+
+            <p
+                class="max-w-2xl
+                       text-base md:text-xl
+                       text-rose-200/80
+                       font-light
+                       leading-relaxed">
+
+                Today is all about celebrating the most magnificent
+                soul who fills my heart with endless joy.
+                Welcome to your special birthday universe.
+
+            </p>
+
+
+            <!-- Navigation -->
+
+            <div
+                class="flex flex-wrap
+                       justify-center
+                       gap-4 pt-4">
+
+                <a
+                    href="#wedding-countdown"
+                    class="px-6 py-3
+                           rounded-full
+                           btn-rose-gradient
+                           text-white
+                           text-sm
+                           font-semibold
+                           flex items-center
+                           space-x-2">
+
+                    <i class="fa-solid fa-ring text-amber-200"></i>
+
+                    <span>
+                        Wedding Countdown
+                    </span>
+
+                </a>
+
+
+                <a
+                    href="#story-mode"
+                    class="px-6 py-3
+                           rounded-full
+                           glass-card
+                           border border-rose-400/30
+                           text-rose-200
+                           hover:text-white
+                           text-sm
+                           font-semibold
+                           flex items-center
+                           space-x-2">
+
+                    <i class="fa-solid fa-camera-retro text-rose-400"></i>
+
+                    <span>
+                        Our Story Gallery
+                    </span>
+
+                </a>
+
+
+                <a
+                    href="#birthday-cake"
+                    class="px-6 py-3
+                           rounded-full
+                           glass-card
+                           border border-amber-400/40
+                           text-amber-200
+                           hover:text-amber-100
+                           text-sm
+                           font-semibold
+                           flex items-center
+                           space-x-2">
+
+                    <i class="fa-solid fa-cake-candles text-amber-300"></i>
+
+                    <span>
+                        Make A Wish!
+                    </span>
+
+                </a>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             WEDDING COUNTDOWN
+        ====================================================== -->
+
+        <section
+            id="wedding-countdown"
+            class="glass-card
+                   rounded-3xl
+                   p-8 md:p-12
+                   relative overflow-hidden
+                   border border-rose-500/30
+                   pulse-romantic">
+
+            <div
+                class="absolute top-0 right-0
+                       p-8 opacity-10
+                       pointer-events-none">
+
+                <i
+                    class="fa-solid fa-rings-wedding
+                           text-9xl
+                           text-rose-300">
+                </i>
+
+            </div>
+
+
+            <div
+                class="text-center
+                       space-y-4
+                       mb-10">
+
+                <span
+                    class="text-xs
+                           uppercase
+                           tracking-widest
+                           text-rose-400
+                           font-semibold">
+
+                    Counting Down To Our Forevers
+
+                </span>
+
+
+                <h2
+                    class="text-3xl md:text-5xl
+                           font-serif-romantic
+                           font-bold
+                           text-transparent
+                           bg-clip-text
+                           bg-gradient-to-r
+                           from-rose-200
+                           to-amber-200">
+
+                    Our Wedding Day
+
+                </h2>
+
+
+                <p
+                    class="text-rose-300
+                           font-cursive
+                           text-2xl md:text-3xl">
+
+                    November 24, 2026
+
+                </p>
+
+
+                <div
+                    class="inline-block
+                           px-4 py-1.5
+                           bg-rose-500/20
+                           rounded-full
+                           border border-rose-400/40
+                           text-rose-200
+                           text-xs md:text-sm
+                           font-medium">
+
+                    💍 Counting every moment
+                    until we become husband & wife!
+
+                </div>
+
+            </div>
+
+
+            <!-- Countdown -->
+
+            <div
+                class="grid
+                       grid-cols-2
+                       md:grid-cols-4
+                       gap-4 md:gap-6
+                       text-center">
+
+                <div
+                    class="glass-card
+                           p-4 md:p-6
+                           rounded-2xl
+                           border border-rose-400/20
+                           bg-rose-950/40">
+
+                    <span
+                        id="timer-days"
+                        class="text-4xl md:text-6xl
+                               font-extrabold
+                               text-amber-300
+                               glow-gold
+                               block">
+
+                        00
+
+                    </span>
+
+                    <span
+                        class="text-xs md:text-sm
+                               uppercase
+                               tracking-wider
+                               text-rose-300
+                               mt-2 block">
+
+                        Days
+
+                    </span>
+
+                </div>
+
+
+                <div
+                    class="glass-card
+                           p-4 md:p-6
+                           rounded-2xl
+                           border border-rose-400/20
+                           bg-rose-950/40">
+
+                    <span
+                        id="timer-hours"
+                        class="text-4xl md:text-6xl
+                               font-extrabold
+                               text-rose-200
+                               block">
+
+                        00
+
+                    </span>
+
+                    <span
+                        class="text-xs md:text-sm
+                               uppercase
+                               tracking-wider
+                               text-rose-300
+                               mt-2 block">
+
+                        Hours
+
+                    </span>
+
+                </div>
+
+
+                <div
+                    class="glass-card
+                           p-4 md:p-6
+                           rounded-2xl
+                           border border-rose-400/20
+                           bg-rose-950/40">
+
+                    <span
+                        id="timer-minutes"
+                        class="text-4xl md:text-6xl
+                               font-extrabold
+                               text-rose-200
+                               block">
+
+                        00
+
+                    </span>
+
+                    <span
+                        class="text-xs md:text-sm
+                               uppercase
+                               tracking-wider
+                               text-rose-300
+                               mt-2 block">
+
+                        Minutes
+
+                    </span>
+
+                </div>
+
+
+                <div
+                    class="glass-card
+                           p-4 md:p-6
+                           rounded-2xl
+                           border border-rose-400/20
+                           bg-rose-950/40">
+
+                    <span
+                        id="timer-seconds"
+                        class="text-4xl md:text-6xl
+                               font-extrabold
+                               text-pink-400
+                               block
+                               animate-pulse">
+
+                        00
+
+                    </span>
+
+                    <span
+                        class="text-xs md:text-sm
+                               uppercase
+                               tracking-wider
+                               text-rose-300
+                               mt-2 block">
+
+                        Seconds
+
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <p
+                class="text-center
+                       text-xs md:text-sm
+                       text-rose-300/70
+                       italic
+                       mt-8">
+
+                "I cannot wait to walk down the aisle,
+                take your hand, and spend every second
+                of the rest of my life loving you."
+
+            </p>
+
+        </section>
+
+
+        <!-- =====================================================
+             PHOTO GALLERY
+        ====================================================== -->
+
+        <section
+            id="story-mode"
+            class="space-y-8">
+
+            <div
+                class="text-center
+                       space-y-3">
+
+                <span
+                    class="text-xs
+                           uppercase
+                           tracking-widest
+                           text-rose-400
+                           font-semibold">
+
+                    Our Journey Together
+
+                </span>
+
+
+                <h2
+                    class="text-3xl md:text-5xl
+                           font-serif-romantic
+                           font-bold
+                           text-white">
+
+                    Moments Written In Stars
+
+                </h2>
+
+
+                <p
+                    class="text-rose-200/70
+                           text-sm md:text-base
+                           max-w-xl mx-auto">
+
+                    These are our special memories.
+                    Click any photo to see it in full screen.
+
+                </p>
+
+            </div>
+
+
+            <div
+                class="grid
+                       grid-cols-1
+                       md:grid-cols-3
+                       gap-8">
+
+
+                <!-- =================================================
+                     PHOTO 1
+                ================================================== -->
+
+                <div
+                    class="glass-card
+                           rounded-2xl
+                           p-4
+                           glass-card-hover
+                           cursor-pointer
+                           group"
+
+                    onclick="openLightbox(
+                        'assets/first_memory.jpeg',
+                        'The Day Our Hearts Aligned',
+                        'Every detail of that day remains etched in my soul. Your laugh, your sparkle, and the moment I knew you were the one.'
+                    )">
+
+
+                    <div
+                        class="relative
+                               overflow-hidden
+                               rounded-xl
+                               aspect-[4/5]
+                               bg-rose-950/50">
+
+                        <img
+                            src="assets/first_memory.jpeg"
+                            alt="Our first memory"
+                            class="memory-image
+                                   w-full
+                                   h-full
+                                   object-cover
+                                   group-hover:scale-110">
+
+                        <div
+                            class="absolute inset-0
+                                   bg-gradient-to-t
+                                   from-black/80
+                                   via-transparent
+                                   to-transparent
+                                   opacity-0
+                                   group-hover:opacity-100
+                                   transition
+                                   duration-300
+                                   flex items-end
+                                   p-4">
+
+                            <span
+                                class="text-amber-200
+                                       text-xs
+                                       font-semibold
+                                       flex items-center
+                                       space-x-1">
+
+                                <i class="fa-solid fa-expand"></i>
+
+                                <span>
+                                    Click to enlarge
+                                </span>
+
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div
+                        class="mt-4
+                               space-y-1
+                               text-center">
+
+                        <span
+                            class="text-xs
+                                   text-rose-400
+                                   font-semibold
+                                   uppercase
+                                   tracking-wider">
+
+                            Chapter I
+
+                        </span>
+
+
+                        <h3
+                            class="text-lg
+                                   font-serif-romantic
+                                   text-white
+                                   font-bold">
+
+                            Where It All Began
+
+                        </h3>
+
+
+                        <p
+                            class="text-xs
+                                   text-rose-200/70">
+
+                            The smile that changed my entire life.
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- =================================================
+                     PHOTO 2
+                ================================================== -->
+
+                <div
+                    class="glass-card
+                           rounded-2xl
+                           p-4
+                           glass-card-hover
+                           cursor-pointer
+                           group"
+
+                    onclick="openLightbox(
+                        'assets/second_memory.jpeg',
+                        'Unforgettable Escapes',
+                        'Exploring new paths with you made me realize that home is not a place, it is wherever you are.'
+                    )">
+
+
+                    <div
+                        class="relative
+                               overflow-hidden
+                               rounded-xl
+                               aspect-[4/5]
+                               bg-rose-950/50">
+
+                        <img
+                            src="assets/second_memory.jpeg"
+                            alt="Our second memory"
+                            class="memory-image
+                                   w-full
+                                   h-full
+                                   object-cover
+                                   group-hover:scale-110">
+
+                        <div
+                            class="absolute inset-0
+                                   bg-gradient-to-t
+                                   from-black/80
+                                   via-transparent
+                                   to-transparent
+                                   opacity-0
+                                   group-hover:opacity-100
+                                   transition
+                                   duration-300
+                                   flex items-end
+                                   p-4">
+
+                            <span
+                                class="text-amber-200
+                                       text-xs
+                                       font-semibold
+                                       flex items-center
+                                       space-x-1">
+
+                                <i class="fa-solid fa-expand"></i>
+
+                                <span>
+                                    Click to enlarge
+                                </span>
+
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div
+                        class="mt-4
+                               space-y-1
+                               text-center">
+
+                        <span
+                            class="text-xs
+                                   text-rose-400
+                                   font-semibold
+                                   uppercase
+                                   tracking-wider">
+
+                            Chapter II
+
+                        </span>
+
+
+                        <h3
+                            class="text-lg
+                                   font-serif-romantic
+                                   text-white
+                                   font-bold">
+
+                            Adventures Together
+
+                        </h3>
+
+
+                        <p
+                            class="text-xs
+                                   text-rose-200/70">
+
+                            Every getaway with you feels like magic.
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- =================================================
+                     PHOTO 3
+                ================================================== -->
+
+                <div
+                    class="glass-card
+                           rounded-2xl
+                           p-4
+                           glass-card-hover
+                           cursor-pointer
+                           group"
+
+                    onclick="openLightbox(
+                        'assets/third_memory.jpeg',
+                        'The Forever Promise',
+                        'The moment I promised you forever, and you gave me your heart. Counting down to our dream wedding!'
+                    )">
+
+
+                    <div
+                        class="relative
+                               overflow-hidden
+                               rounded-xl
+                               aspect-[4/5]
+                               bg-rose-950/50">
+
+                        <img
+                            src="assets/third_memory.jpeg"
+                            alt="Our third memory"
+                            class="memory-image
+                                   w-full
+                                   h-full
+                                   object-cover
+                                   group-hover:scale-110">
+
+                        <div
+                            class="absolute inset-0
+                                   bg-gradient-to-t
+                                   from-black/80
+                                   via-transparent
+                                   to-transparent
+                                   opacity-0
+                                   group-hover:opacity-100
+                                   transition
+                                   duration-300
+                                   flex items-end
+                                   p-4">
+
+                            <span
+                                class="text-amber-200
+                                       text-xs
+                                       font-semibold
+                                       flex items-center
+                                       space-x-1">
+
+                                <i class="fa-solid fa-expand"></i>
+
+                                <span>
+                                    Click to enlarge
+                                </span>
+
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div
+                        class="mt-4
+                               space-y-1
+                               text-center">
+
+                        <span
+                            class="text-xs
+                                   text-rose-400
+                                   font-semibold
+                                   uppercase
+                                   tracking-wider">
+
+                            Chapter III
+
+                        </span>
+
+
+                        <h3
+                            class="text-lg
+                                   font-serif-romantic
+                                   text-white
+                                   font-bold">
+
+                            The Engagement & Next Step
+
+                        </h3>
+
+
+                        <p
+                            class="text-xs
+                                   text-rose-200/70">
+
+                            Next station: November 24, 2026 💍
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             QUOTES
+        ====================================================== -->
+
+        <section
+            class="glass-card
+                   rounded-3xl
+                   p-8 md:p-12
+                   text-center
+                   relative overflow-hidden
+                   border border-rose-500/20">
+
+            <i
+                class="fa-solid fa-quote-left
+                       text-4xl
+                       text-rose-400/40
+                       mb-4
+                       block">
+            </i>
+
+
+            <p
+                id="quoteText"
+                class="text-xl md:text-3xl
+                       font-serif-romantic
+                       italic
+                       text-rose-100
+                       transition-opacity
+                       duration-500
+                       min-h-[100px]
+                       flex
+                       items-center
+                       justify-center">
+
+                "In all the world, there is no heart for me like yours."
+
+            </p>
+
+
+            <span
+                id="quoteAuthor"
+                class="text-xs
+                       uppercase
+                       tracking-widest
+                       text-amber-300
+                       font-semibold
+                       mt-4
+                       block">
+
+                — Maya Angelou
+
+            </span>
+
+
+            <div
+                class="flex
+                       justify-center
+                       items-center
+                       space-x-3
+                       mt-6">
+
+                <button
+                    onclick="nextQuote(-1)"
+                    class="w-10 h-10
+                           rounded-full
+                           glass-card
+                           hover:bg-rose-500/30
+                           flex items-center
+                           justify-center
+                           text-rose-200
+                           transition">
+
+                    <i class="fa-solid fa-chevron-left"></i>
+
+                </button>
+
+
+                <button
+                    onclick="nextQuote(1)"
+                    class="w-10 h-10
+                           rounded-full
+                           glass-card
+                           hover:bg-rose-500/30
+                           flex items-center
+                           justify-center
+                           text-rose-200
+                           transition">
+
+                    <i class="fa-solid fa-chevron-right"></i>
+
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             LOVE LETTER
+        ====================================================== -->
+
+        <section
+            class="space-y-6">
+
+            <div
+                class="text-center
+                       space-y-2">
+
+                <span
+                    class="text-xs
+                           uppercase
+                           tracking-widest
+                           text-rose-400
+                           font-semibold">
+
+                    Special Delivery
+
+                </span>
+
+
+                <h2
+                    class="text-3xl md:text-5xl
+                           font-serif-romantic
+                           font-bold
+                           text-white">
+
+                    A Love Letter For My Fiancée
+
+                </h2>
+
+
+                <p
+                    class="text-rose-200/70
+                           text-sm">
+
+                    Tap the seal to open your birthday letter
+
+                </p>
+
+            </div>
+
+
+            <div class="max-w-2xl mx-auto">
+
+                <div
+                    id="envelopeContainer"
+                    class="glass-card
+                           rounded-3xl
+                           p-6 md:p-10
+                           border border-rose-400/30
+                           text-center
+                           relative
+                           cursor-pointer
+                           overflow-hidden
+                           transition-all
+                           duration-500
+                           hover:border-rose-400/60"
+                    onclick="openLoveLetter()">
+
+
+                    <!-- Closed -->
+
+                    <div
+                        id="envelopeCover"
+                        class="space-y-6
+                               py-8">
+
+                        <div
+                            class="w-20 h-20
+                                   mx-auto
+                                   rounded-full
+                                   bg-gradient-to-tr
+                                   from-rose-700
+                                   to-red-600
+                                   flex items-center
+                                   justify-center
+                                   shadow-2xl
+                                   border-2
+                                   border-amber-300/60
+                                   animate-pulse">
+
+                            <i
+                                class="fa-solid fa-stamp
+                                       text-amber-200
+                                       text-3xl">
+                            </i>
+
+                        </div>
+
+
+                        <div>
+
+                            <h3
+                                class="text-2xl
+                                       font-serif-romantic
+                                       text-rose-200
+                                       font-bold">
+
+                                Sealed With Forever Love
+
+                            </h3>
+
+
+                            <p
+                                class="text-xs
+                                       text-rose-300/70
+                                       mt-1">
+
+                                Click anywhere to break seal & read
+
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Open -->
+
+                    <div
+                        id="letterContent"
+                        class="hidden
+                               text-left
+                               space-y-4
+                               pt-4
+                               border-t
+                               border-rose-400/20">
+
+
+                        <div
+                            class="flex
+                                   justify-between
+                                   items-center
+                                   text-rose-400
+                                   text-xs
+                                   font-semibold
+                                   uppercase
+                                   tracking-wider
+                                   border-b
+                                   border-rose-500/20
+                                   pb-2">
+
+                            <span>
+                                To My Dearest Fiancée
+                            </span>
+
+                            <span>
+                                Birthday Edition
+                            </span>
+
+                        </div>
+
+
+                        <div
+                            class="text-rose-100
+                                   text-sm md:text-base
+                                   leading-relaxed
+                                   space-y-4
+                                   font-light">
+
+                            <p
+                                id="typewriterText"
+                                class="min-h-[160px]">
+                            </p>
+
+                        </div>
+
+
+                        <div
+                            class="pt-4
+                                   text-right">
+
+                            <p
+                                class="font-cursive
+                                       text-3xl
+                                       text-rose-300">
+
+                                With all my love & devotion,
+
+                            </p>
+
+
+                            <p
+                                class="text-xs
+                                       font-semibold
+                                       text-amber-300
+                                       uppercase
+                                       tracking-widest
+                                       mt-1">
+
+                                Your Future Husband 💍
+
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             MEMORY CARDS
+        ====================================================== -->
+
+        <section
+            class="space-y-8">
+
+            <div
+                class="text-center
+                       space-y-2">
+
+                <span
+                    class="text-xs
+                           uppercase
+                           tracking-widest
+                           text-rose-400
+                           font-semibold">
+
+                    Treasured Secrets
+
+                </span>
+
+
+                <h2
+                    class="text-3xl md:text-5xl
+                           font-serif-romantic
+                           font-bold
+                           text-white">
+
+                    Click To Reveal A Memory
+
+                </h2>
+
+
+                <p
+                    class="text-rose-200/70
+                           text-sm">
+
+                    Tap each card to unlock a sweet memory
+
+                </p>
+
+            </div>
+
+
+            <div
+                class="grid
+                       grid-cols-1
+                       md:grid-cols-3
+                       gap-6">
+
+
+                <div
+                    class="glass-card
+                           rounded-2xl
+                           p-6
+                           text-center
+                           cursor-pointer
+                           min-h-[180px]
+                           flex flex-col
+                           justify-center
+                           items-center
+                           transition-all
+                           duration-500
+                           hover:scale-105
+                           border border-rose-400/20"
+
+                    onclick="revealMemory(
+                        this,
+                        'My Favorite Little Habit of Yours',
+                        'The way your eyes twinkle whenever you get excited about your favorite food. It lights up my entire world every single time! ❤️'
+                    )">
+
+                    <i
+                        class="fa-solid fa-cookie-bite
+                               text-3xl
+                               text-amber-300
+                               mb-3">
+                    </i>
+
+                    <h3
+                        class="text-lg
+                               font-serif-romantic
+                               text-rose-200
+                               font-bold
+                               mb-1">
+
+                        Memory #1
+
+                    </h3>
+
+                    <p
+                        class="text-xs
+                               text-rose-300/70">
+
+                        Tap to reveal sweet secret
+
+                    </p>
+
+                </div>
+
+
+                <div
+                    class="glass-card
+                           rounded-2xl
+                           p-6
+                           text-center
+                           cursor-pointer
+                           min-h-[180px]
+                           flex flex-col
+                           justify-center
+                           items-center
+                           transition-all
+                           duration-500
+                           hover:scale-105
+                           border border-rose-400/20"
+
+                    onclick="revealMemory(
+                        this,
+                        'Our Late Night Talks',
+                        'Those endless midnight conversations where we talked about our future, our wedding, and growing old together. I knew you were my home.'
+                    )">
+
+                    <i
+                        class="fa-solid fa-comments
+                               text-3xl
+                               text-pink-400
+                               mb-3">
+                    </i>
+
+                    <h3
+                        class="text-lg
+                               font-serif-romantic
+                               text-rose-200
+                               font-bold
+                               mb-1">
+
+                        Memory #2
+
+                    </h3>
+
+                    <p
+                        class="text-xs
+                               text-rose-300/70">
+
+                        Tap to reveal sweet secret
+
+                    </p>
+
+                </div>
+
+
+                <div
+                    class="glass-card
+                           rounded-2xl
+                           p-6
+                           text-center
+                           cursor-pointer
+                           min-h-[180px]
+                           flex flex-col
+                           justify-center
+                           items-center
+                           transition-all
+                           duration-500
+                           hover:scale-105
+                           border border-rose-400/20"
+
+                    onclick="revealMemory(
+                        this,
+                        'Why 24 Nov 2026 is Special',
+                        'In just a little while, I get to call you my wife forever. Counting every single heartbeat until our wedding day!'
+                    )">
+
+                    <i
+                        class="fa-solid fa-heart-circle-bolt
+                               text-3xl
+                               text-rose-400
+                               mb-3">
+                    </i>
+
+                    <h3
+                        class="text-lg
+                               font-serif-romantic
+                               text-rose-200
+                               font-bold
+                               mb-1">
+
+                        Memory #3
+
+                    </h3>
+
+                    <p
+                        class="text-xs
+                               text-rose-300/70">
+
+                        Tap to reveal sweet secret
+
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             BIRTHDAY CAKE
+        ====================================================== -->
+
+        <section
+            id="birthday-cake"
+            class="glass-card
+                   rounded-3xl
+                   p-8 md:p-12
+                   text-center
+                   space-y-8
+                   border border-amber-400/30
+                   relative
+                   overflow-hidden">
+
+
+            <div
+                class="space-y-2">
+
+                <span
+                    class="text-xs
+                           uppercase
+                           tracking-widest
+                           text-amber-300
+                           font-semibold">
+
+                    Make A Wish & Tap Candles
+
+                </span>
+
+
+                <h2
+                    class="text-3xl md:text-5xl
+                           font-serif-romantic
+                           font-bold
+                           text-white">
+
+                    Your Birthday Cake
+
+                </h2>
+
+
+                <p
+                    class="text-rose-200/80
+                           text-sm
+                           max-w-lg
+                           mx-auto">
+
+                    Tap the candles to blow them out
+                    and launch the birthday fireworks!
+
+                </p>
+
+            </div>
+
+
+            <div
+                class="py-8
+                       flex flex-col
+                       items-center
+                       justify-center">
+
+
+                <!-- Candles -->
+
+                <div
+                    class="flex
+                           justify-center
+                           items-end
+                           space-x-6
+                           mb-1
+                           relative
+                           z-10
+                           cursor-pointer"
+                    onclick="blowCandles()">
+
+
+                    <div
+                        class="flex flex-col
+                               items-center">
+
+                        <div
+                            id="flame1"
+                            class="flame mb-1">
+                        </div>
+
+                        <div
+                            class="w-3 h-12
+                                   bg-gradient-to-t
+                                   from-pink-400
+                                   to-rose-200
+                                   rounded-t-sm
+                                   shadow-md">
+                        </div>
+
+                    </div>
+
+
+                    <div
+                        class="flex flex-col
+                               items-center
+                               -mt-2">
+
+                        <div
+                            id="flame2"
+                            class="flame mb-1">
+                        </div>
+
+                        <div
+                            class="w-3 h-14
+                                   bg-gradient-to-t
+                                   from-amber-300
+                                   to-yellow-100
+                                   rounded-t-sm
+                                   shadow-md">
+                        </div>
+
+                    </div>
+
+
+                    <div
+                        class="flex flex-col
+                               items-center">
+
+                        <div
+                            id="flame3"
+                            class="flame mb-1">
+                        </div>
+
+                        <div
+                            class="w-3 h-12
+                                   bg-gradient-to-t
+                                   from-pink-400
+                                   to-rose-200
+                                   rounded-t-sm
+                                   shadow-md">
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Cake -->
+
+                <div
+                    class="w-48 md:w-64
+                           h-12
+                           bg-gradient-to-r
+                           from-pink-500
+                           via-rose-400
+                           to-pink-500
+                           rounded-t-2xl
+                           shadow-xl
+                           border-b-4
+                           border-rose-600
+                           relative
+                           flex
+                           items-center
+                           justify-center">
+
+                    <span
+                        class="text-xs
+                               font-bold
+                               text-white
+                               tracking-widest">
+
+                        HAPPY BIRTHDAY
+
+                    </span>
+
+                </div>
+
+
+                <div
+                    class="w-60 md:w-80
+                           h-16
+                           bg-gradient-to-r
+                           from-rose-800
+                           via-pink-700
+                           to-rose-800
+                           rounded-t-lg
+                           shadow-2xl
+                           border-b-4
+                           border-rose-950
+                           flex
+                           items-center
+                           justify-center">
+
+                    <span
+                        class="text-xl
+                               font-cursive
+                               text-amber-200">
+
+                        My Loving Fiancée
+
+                    </span>
+
+                </div>
+
+
+                <!-- Stand -->
+
+                <div
+                    class="w-72 md:w-96
+                           h-4
+                           bg-gradient-to-r
+                           from-slate-300
+                           via-white
+                           to-slate-300
+                           rounded-full
+                           shadow-2xl">
+                </div>
+
+            </div>
+
+
+            <div>
+
+                <button
+                    id="blowBtn"
+                    onclick="blowCandles()"
+                    class="px-8 py-3
+                           rounded-full
+                           btn-rose-gradient
+                           text-white
+                           text-sm
+                           font-bold
+                           shadow-lg
+                           hover:scale-105
+                           transition">
+
+                    <i class="fa-solid fa-wind mr-2"></i>
+
+                    Tap To Blow Out Candles!
+
+                </button>
+
+            </div>
+
+
+            <div
+                id="wishBanner"
+                class="hidden
+                       p-6
+                       rounded-2xl
+                       bg-gradient-to-r
+                       from-rose-900/80
+                       to-purple-900/80
+                       border
+                       border-amber-300/40
+                       animate-pulse">
+
+                <h3
+                    class="text-2xl md:text-3xl
+                           font-serif-romantic
+                           text-amber-200
+                           font-bold">
+
+                    ✨ May All Your Dreams Come True! ✨
+
+                </h3>
+
+
+                <p
+                    class="text-rose-200
+                           text-sm
+                           mt-2">
+
+                    I love you more than words can ever say.
+                    Happy Birthday my sweet angel!
+
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             FOOTER
+        ====================================================== -->
+
+        <footer
+            class="text-center
+                   space-y-4
+                   pt-10
+                   border-t
+                   border-rose-500/20">
+
+            <p
+                class="text-xl
+                       font-cursive
+                       text-rose-300">
+
+                Made with infinite love for my future wife ❤️
+
+            </p>
+
+
+            <p
+                class="text-xs
+                       text-rose-200/50">
+
+                Countdown Target:
+                November 24, 2026 💍
+
+            </p>
+
+        </footer>
+
+    </main>
+
+
+    <!-- =========================================================
+         LIGHTBOX
+    ========================================================== -->
+
+    <div
+        id="lightbox"
+        class="fixed inset-0
+               z-50
+               bg-black/90
+               backdrop-blur-md
+               hidden
+               flex
+               items-center
+               justify-center
+               p-4">
+
+
+        <button
+            onclick="closeLightbox()"
+            class="absolute
+                   top-6 right-6
+                   text-white
+                   text-3xl
+                   hover:text-rose-400
+                   transition">
+
+            <i class="fa-solid fa-xmark"></i>
+
+        </button>
+
+
+        <div
+            class="max-w-3xl
+                   w-full
+                   glass-card
+                   rounded-2xl
+                   p-4 md:p-6
+                   space-y-4
+                   border border-rose-400/30">
+
+            <img
+                id="lightboxImg"
+                src=""
+                alt="Full memory"
+                class="w-full
+                       max-h-[65vh]
+                       object-contain
+                       rounded-lg">
+
+
+            <div
+                class="space-y-1
+                       text-center">
+
+                <h3
+                    id="lightboxTitle"
+                    class="text-2xl
+                           font-serif-romantic
+                           text-amber-200
+                           font-bold">
+                </h3>
+
+
+                <p
+                    id="lightboxDesc"
+                    class="text-sm
+                           text-rose-200/80">
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================================================
+         JAVASCRIPT
+    ========================================================== -->
+
+    <script>
+
+        /* =========================================================
+           THREE.JS BACKGROUND
+        ========================================================== */
+
+        let scene;
+        let camera;
+        let renderer;
+        let heartGroup;
+        let starsMesh;
+
+        let mouseX = 0;
+        let mouseY = 0;
+
+
+        function init3D() {
+
+            const canvas =
+                document.getElementById('canvas3d');
+
+            scene = new THREE.Scene();
+
+
+            camera =
+                new THREE.PerspectiveCamera(
+                    60,
+                    window.innerWidth / window.innerHeight,
+                    0.1,
+                    1000
+                );
+
+
+            camera.position.z = 30;
+
+
+            renderer =
+                new THREE.WebGLRenderer({
+                    canvas: canvas,
+                    alpha: true,
+                    antialias: true
+                });
+
+
+            renderer.setSize(
+                window.innerWidth,
+                window.innerHeight
+            );
+
+
+            renderer.setPixelRatio(
+                Math.min(window.devicePixelRatio, 2)
+            );
+
+
+            /* Lights */
+
+            const ambientLight =
+                new THREE.AmbientLight(
+                    0xffb6c1,
+                    1.2
+                );
+
+            scene.add(ambientLight);
+
+
+            const dirLight =
+                new THREE.DirectionalLight(
+                    0xff4500,
+                    1.5
+                );
+
+            dirLight.position.set(
+                10,
+                20,
+                15
+            );
+
+            scene.add(dirLight);
+
+
+            /* Heart */
+
+            const heartShape =
+                new THREE.Shape();
+
+            const x = 0;
+            const y = 0;
+
+
+            heartShape.moveTo(
+                x + 0.5,
+                y + 0.5
+            );
+
+
+            heartShape.bezierCurveTo(
+                x + 0.5,
+                y + 0.5,
+                x + 0.4,
+                y,
+                x,
+                y
+            );
+
+
+            heartShape.bezierCurveTo(
+                x - 0.6,
+                y,
+                x - 0.6,
+                y + 0.7,
+                x - 0.6,
+                y + 0.7
+            );
+
+
+            heartShape.bezierCurveTo(
+                x - 0.6,
+                y + 1.1,
+                x - 0.3,
+                y + 1.54,
+                x + 0.5,
+                y + 1.9
+            );
+
+
+            heartShape.bezierCurveTo(
+                x + 1.3,
+                y + 1.54,
+                x + 1.6,
+                y + 1.1,
+                x + 1.6,
+                y + 0.7
+            );
+
+
+            heartShape.bezierCurveTo(
+                x + 1.6,
+                y + 0.7,
+                x + 1.6,
+                y,
+                x + 1.0,
+                y
+            );
+
+
+            heartShape.bezierCurveTo(
+                x + 0.7,
+                y,
+                x + 0.5,
+                y + 0.5,
+                x + 0.5,
+                y + 0.5
+            );
+
+
+            const extrudeSettings = {
+                depth: 0.3,
+                bevelEnabled: true,
+                bevelSegments: 3,
+                steps: 1,
+                bevelSize: 0.1,
+                bevelThickness: 0.1
+            };
+
+
+            const heartGeometry =
+                new THREE.ExtrudeGeometry(
+                    heartShape,
+                    extrudeSettings
+                );
+
+
+            heartGeometry.center();
+
+
+            const materials = [
+
+                new THREE.MeshPhongMaterial({
+                    color: 0xf43f5e,
+                    shininess: 80
+                }),
+
+                new THREE.MeshPhongMaterial({
+                    color: 0xec4899,
+                    shininess: 90
+                }),
+
+                new THREE.MeshPhongMaterial({
+                    color: 0xfbbf24,
+                    shininess: 100
+                }),
+
+                new THREE.MeshPhongMaterial({
+                    color: 0xe11d48,
+                    shininess: 70
+                })
+
+            ];
+
+
+            heartGroup =
+                new THREE.Group();
+
+
+            const count = 45;
+
+
+            for (let i = 0; i < count; i++) {
+
+                const mat =
+                    materials[
+                        Math.floor(
+                            Math.random() *
+                            materials.length
+                        )
+                    ];
+
+
+                const mesh =
+                    new THREE.Mesh(
+                        heartGeometry,
+                        mat
+                    );
+
+
+                mesh.position.x =
+                    (Math.random() - 0.5) * 50;
+
+
+                mesh.position.y =
+                    (Math.random() - 0.5) * 50;
+
+
+                mesh.position.z =
+                    (Math.random() - 0.5) * 30;
+
+
+                const scale =
+                    Math.random() * 0.8 + 0.4;
+
+
+                mesh.scale.set(
+                    scale,
+                    scale,
+                    scale
+                );
+
+
+                mesh.rotation.x =
+                    Math.random() * Math.PI;
+
+
+                mesh.rotation.y =
+                    Math.random() * Math.PI;
+
+
+                mesh.userData = {
+
+                    rotSpeedX:
+                        (Math.random() - 0.5) * 0.02,
+
+                    rotSpeedY:
+                        (Math.random() - 0.5) * 0.02,
+
+                    floatSpeed:
+                        Math.random() * 0.02 + 0.005
+
+                };
+
+
+                heartGroup.add(mesh);
+
+            }
+
+
+            scene.add(heartGroup);
+
+
+            /* Stars */
+
+            const starsGeo =
+                new THREE.BufferGeometry();
+
+            const starsCount = 400;
+
+            const starPositions =
+                new Float32Array(
+                    starsCount * 3
+                );
+
+
+            for (
+                let i = 0;
+                i < starsCount * 3;
+                i++
+            ) {
+
+                starPositions[i] =
+                    (Math.random() - 0.5) * 120;
+
+            }
+
+
+            starsGeo.setAttribute(
+                'position',
+                new THREE.BufferAttribute(
+                    starPositions,
+                    3
+                )
+            );
+
+
+            const starsMat =
+                new THREE.PointsMaterial({
+                    color: 0xffb6c1,
+                    size: 0.5,
+                    transparent: true,
+                    opacity: 0.8
+                });
+
+
+            starsMesh =
+                new THREE.Points(
+                    starsGeo,
+                    starsMat
+                );
+
+
+            scene.add(starsMesh);
+
+
+            window.addEventListener(
+                'resize',
+                onWindowResize
+            );
+
+
+            document.addEventListener(
+                'mousemove',
+                onMouseMove
+            );
+
+        }
+
+
+        function onWindowResize() {
+
+            camera.aspect =
+                window.innerWidth /
+                window.innerHeight;
+
+
+            camera.updateProjectionMatrix();
+
+
+            renderer.setSize(
+                window.innerWidth,
+                window.innerHeight
+            );
+
+        }
+
+
+        function onMouseMove(event) {
+
+            mouseX =
+                (event.clientX -
+                window.innerWidth / 2) *
+                0.0005;
+
+
+            mouseY =
+                (event.clientY -
+                window.innerHeight / 2) *
+                0.0005;
+
+        }
+
+
+        function animate3D() {
+
+            requestAnimationFrame(
+                animate3D
+            );
+
+
+            if (!heartGroup) {
+                return;
+            }
+
+
+            heartGroup.rotation.y +=
+                (mouseX -
+                heartGroup.rotation.y) *
+                0.05;
+
+
+            heartGroup.rotation.x +=
+                (mouseY -
+                heartGroup.rotation.x) *
+                0.05;
+
+
+            heartGroup.children.forEach(
+                heart => {
+
+                    heart.rotation.x +=
+                        heart.userData.rotSpeedX;
+
+                    heart.rotation.y +=
+                        heart.userData.rotSpeedY;
+
+                    heart.position.y +=
+                        Math.sin(
+                            Date.now() * 0.001 +
+                            heart.position.x
+                        ) * 0.01;
+
+                }
+            );
+
+
+            starsMesh.rotation.y +=
+                0.0003;
+
+
+            renderer.render(
+                scene,
+                camera
+            );
+
+        }
+
+
+        /* =========================================================
+           WEDDING COUNTDOWN
+        ========================================================== */
+
+        const weddingDate =
+            new Date(
+                'November 24, 2026 00:00:00'
+            ).getTime();
+
+
+        function updateCountdown() {
+
+            const now =
+                new Date().getTime();
+
+
+            const distance =
+                weddingDate - now;
+
+
+            if (distance <= 0) {
+
+                document.getElementById(
+                    'timer-days'
+                ).innerText = '00';
+
+
+                document.getElementById(
+                    'timer-hours'
+                ).innerText = '00';
+
+
+                document.getElementById(
+                    'timer-minutes'
+                ).innerText = '00';
+
+
+                document.getElementById(
+                    'timer-seconds'
+                ).innerText = '00';
+
+
+                return;
+            }
+
+
+            const days =
+                Math.floor(
+                    distance /
+                    (1000 * 60 * 60 * 24)
+                );
+
+
+            const hours =
+                Math.floor(
+                    (distance %
+                    (1000 * 60 * 60 * 24)) /
+                    (1000 * 60 * 60)
+                );
+
+
+            const minutes =
+                Math.floor(
+                    (distance %
+                    (1000 * 60 * 60)) /
+                    (1000 * 60)
+                );
+
+
+            const seconds =
+                Math.floor(
+                    (distance %
+                    (1000 * 60)) /
+                    1000
+                );
+
+
+            document.getElementById(
+                'timer-days'
+            ).innerText =
+                String(days).padStart(2, '0');
+
+
+            document.getElementById(
+                'timer-hours'
+            ).innerText =
+                String(hours).padStart(2, '0');
+
+
+            document.getElementById(
+                'timer-minutes'
+            ).innerText =
+                String(minutes).padStart(2, '0');
+
+
+            document.getElementById(
+                'timer-seconds'
+            ).innerText =
+                String(seconds).padStart(2, '0');
+
+        }
+
+
+        /* =========================================================
+           QUOTES
+        ========================================================== */
+
+        const quotes = [
+
+            {
+                text:
+                    '"In all the world, there is no heart for me like yours. In all the world, there is no love for you like mine."',
+                author:
+                    '— Maya Angelou'
+            },
+
+            {
+                text:
+                    '"I love you not only for what you are, but for what I am when I am with you."',
+                author:
+                    '— Roy Croft'
+            },
+
+            {
+                text:
+                    '"Whatever our souls are made of, yours and mine are the same."',
+                author:
+                    '— Emily Brontë'
+            },
+
+            {
+                text:
+                    '"You are my today and all of my tomorrows. Counting down to 24th November 2026!"',
+                author:
+                    '— Forever Yours'
+            }
+
+        ];
+
+
+        let currentQuoteIndex = 0;
+
+
+        function nextQuote(direction) {
+
+            const quoteTextEl =
+                document.getElementById(
+                    'quoteText'
+                );
+
+
+            const quoteAuthorEl =
+                document.getElementById(
+                    'quoteAuthor'
+                );
+
+
+            quoteTextEl.style.opacity = 0;
+
+
+            setTimeout(() => {
+
+                currentQuoteIndex =
+                    (
+                        currentQuoteIndex +
+                        direction +
+                        quotes.length
+                    ) %
+                    quotes.length;
+
+
+                quoteTextEl.innerText =
+                    quotes[
+                        currentQuoteIndex
+                    ].text;
+
+
+                quoteAuthorEl.innerText =
+                    quotes[
+                        currentQuoteIndex
+                    ].author;
+
+
+                quoteTextEl.style.opacity = 1;
+
+            }, 300);
+
+        }
+
+
+        /* =========================================================
+           LOVE LETTER
+        ========================================================== */
+
+        const fullLoveLetterText = `My Dearest Fiancée,
+
+Happy Birthday to the woman who stole my heart and transformed my life into a beautiful fairytale. Every single day with you feels like a gift I never knew I deserved.
+
+As we celebrate you today, my heart bursts with joy knowing that on November 24, 2026, I get to stand by your side and pledge my forever to you. You are my best friend, my soulmate, and my entire universe.
+
+May this year bring you endless laughter, warmth, and all the happiness your gentle heart can hold.
+
+Forever and always yours,`;
+
+
+        let letterOpened = false;
+
+
+        function openLoveLetter() {
+
+            if (letterOpened) {
+                return;
+            }
+
+
+            letterOpened = true;
+
+
+            document.getElementById(
+                'envelopeCover'
+            ).classList.add('hidden');
+
+
+            const letterContent =
+                document.getElementById(
+                    'letterContent'
+                );
+
+
+            letterContent.classList.remove(
+                'hidden'
+            );
+
+
+            const targetEl =
+                document.getElementById(
+                    'typewriterText'
+                );
+
+
+            let index = 0;
+
+
+            function typeNextChar() {
+
+                if (
+                    index <
+                    fullLoveLetterText.length
+                ) {
+
+                    const char =
+                        fullLoveLetterText.charAt(
+                            index
+                        );
+
+
+                    if (char === '\n') {
+
+                        targetEl.innerHTML +=
+                            '<br>';
+
+                    } else {
+
+                        targetEl.innerHTML +=
+                            char;
+
+                    }
+
+
+                    index++;
+
+
+                    setTimeout(
+                        typeNextChar,
+                        25
+                    );
+
+                }
+
+            }
+
+
+            typeNextChar();
+
+        }
+
+
+        /* =========================================================
+           MEMORY CARDS
+        ========================================================== */
+
+        function revealMemory(
+            cardElement,
+            title,
+            details
+        ) {
+
+            cardElement.innerHTML = `
+
+                <div class="space-y-2">
+
+                    <i
+                        class="fa-solid
+                               fa-sparkles
+                               text-amber-300
+                               text-2xl">
+                    </i>
+
+                    <h4
+                        class="text-base
+                               font-serif-romantic
+                               font-bold
+                               text-amber-200">
+
+                        ${title}
+
+                    </h4>
+
+                    <p
+                        class="text-xs
+                               text-rose-100/90
+                               leading-relaxed">
+
+                        ${details}
+
+                    </p>
+
+                </div>
+
+            `;
+
+
+            cardElement.classList.add(
+                'bg-rose-900/60',
+                'border-amber-400/50'
+            );
+
+        }
+
+
+        /* =========================================================
+           PHOTO LIGHTBOX
+        ========================================================== */
+
+        function openLightbox(
+            imgUrl,
+            title,
+            desc
+        ) {
+
+            document.getElementById(
+                'lightboxImg'
+            ).src = imgUrl;
+
+
+            document.getElementById(
+                'lightboxTitle'
+            ).innerText = title;
+
+
+            document.getElementById(
+                'lightboxDesc'
+            ).innerText = desc;
+
+
+            document.getElementById(
+                'lightbox'
+            ).classList.remove(
+                'hidden'
+            );
+
+
+            document.body.style.overflow =
+                'hidden';
+
+        }
+
+
+        function closeLightbox() {
+
+            document.getElementById(
+                'lightbox'
+            ).classList.add(
+                'hidden'
+            );
+
+
+            document.body.style.overflow =
+                '';
+
+        }
+
+
+        /* Close lightbox by clicking background */
+
+        document.getElementById(
+            'lightbox'
+        ).addEventListener(
+            'click',
+            function(event) {
+
+                if (
+                    event.target === this
+                ) {
+
+                    closeLightbox();
+
+                }
+
+            }
+        );
+
+
+        /* Escape key */
+
+        document.addEventListener(
+            'keydown',
+            function(event) {
+
+                if (
+                    event.key === 'Escape'
+                ) {
+
+                    closeLightbox();
+
+                }
+
+            }
+        );
+
+
+        /* =========================================================
+           BIRTHDAY CAKE
+        ========================================================== */
+
+        let candlesBlown = false;
+
+
+        function blowCandles() {
+
+            if (candlesBlown) {
+                return;
+            }
+
+
+            candlesBlown = true;
+
+
+            document.getElementById(
+                'flame1'
+            ).style.display = 'none';
+
+
+            document.getElementById(
+                'flame2'
+            ).style.display = 'none';
+
+
+            document.getElementById(
+                'flame3'
+            ).style.display = 'none';
+
+
+            document.getElementById(
+                'blowBtn'
+            ).classList.add(
+                'hidden'
+            );
+
+
+            document.getElementById(
+                'wishBanner'
+            ).classList.remove(
+                'hidden'
+            );
+
+
+            startFireworks();
+
+        }
+
+
+        /* =========================================================
+           FIREWORKS
+        ========================================================== */
+
+        function startFireworks() {
+
+            const canvas =
+                document.getElementById(
+                    'fireworksCanvas'
+                );
+
+
+            canvas.classList.remove(
+                'hidden'
+            );
+
+
+            const ctx =
+                canvas.getContext('2d');
+
+
+            canvas.width =
+                window.innerWidth;
+
+
+            canvas.height =
+                window.innerHeight;
+
+
+            const particles = [];
+
+
+            const colors = [
+                '#f43f5e',
+                '#ec4899',
+                '#fbbf24',
+                '#38bdf8',
+                '#a855f7'
+            ];
+
+
+            /*
+             * Multiple fireworks bursts
+             */
+
+            for (
+                let burst = 0;
+                burst < 4;
+                burst++
+            ) {
+
+                const centerX =
+                    Math.random() *
+                    canvas.width;
+
+
+                const centerY =
+                    Math.random() *
+                    canvas.height *
+                    0.55;
+
+
+                for (
+                    let i = 0;
+                    i < 70;
+                    i++
+                ) {
+
+                    const angle =
+                        Math.random() *
+                        Math.PI * 2;
+
+
+                    const speed =
+                        Math.random() * 8 + 3;
+
+
+                    particles.push({
+
+                        x: centerX,
+
+                        y: centerY,
+
+                        vx:
+                            Math.cos(angle) *
+                            speed,
+
+                        vy:
+                            Math.sin(angle) *
+                            speed,
+
+                        color:
+                            colors[
+                                Math.floor(
+                                    Math.random() *
+                                    colors.length
+                                )
+                            ],
+
+                        radius:
+                            Math.random() * 3 + 1,
+
+                        alpha: 1
+
+                    });
+
+                }
+
+            }
+
+
+            function renderFireworks() {
+
+                ctx.fillStyle =
+                    'rgba(11, 3, 14, 0.18)';
+
+
+                ctx.fillRect(
+                    0,
+                    0,
+                    canvas.width,
+                    canvas.height
+                );
+
+
+                particles.forEach(
+                    (p) => {
+
+                        p.x += p.vx;
+
+                        p.y += p.vy;
+
+                        p.vy += 0.08;
+
+                        p.alpha -= 0.008;
+
+
+                        ctx.beginPath();
+
+
+                        ctx.arc(
+                            p.x,
+                            p.y,
+                            p.radius,
+                            0,
+                            Math.PI * 2
+                        );
+
+
+                        ctx.fillStyle =
+                            p.color;
+
+
+                        ctx.globalAlpha =
+                            Math.max(
+                                0,
+                                p.alpha
+                            );
+
+
+                        ctx.fill();
+
+
+                    }
+                );
+
+
+                ctx.globalAlpha = 1;
+
+
+                const remaining =
+                    particles.filter(
+                        p => p.alpha > 0
+                    );
+
+
+                if (
+                    remaining.length > 0
+                ) {
+
+                    requestAnimationFrame(
+                        renderFireworks
+                    );
+
+                } else {
+
+                    canvas.classList.add(
+                        'hidden'
+                    );
+
+                }
+
+            }
+
+
+            renderFireworks();
+
+        }
+
+
+        /* =========================================================
+           REAL MP3 MUSIC
+        ========================================================== */
+
+        const birthdayAudio =
+            document.getElementById(
+                'birthdayAudio'
+            );
+
+
+        let isPlaying = false;
+
+
+        async function toggleMusic() {
+
+            const btnText =
+                document.getElementById(
+                    'musicText'
+                );
+
+
+            const btnIcon =
+                document.getElementById(
+                    'musicIcon'
+                );
+
+
+            if (!isPlaying) {
+
+                try {
+
+                    await birthdayAudio.play();
+
+
+                    isPlaying = true;
+
+
+                    btnText.innerText =
+                        'Pause Song';
+
+
+                    btnIcon.className =
+                        'fa-solid fa-pause text-amber-300';
+
+                } catch (error) {
+
+                    console.error(
+                        'Audio playback error:',
+                        error
+                    );
+
+
+                    alert(
+                        'Tap the music button once more to start your song.'
+                    );
+
+                }
+
+            } else {
+
+                birthdayAudio.pause();
+
+
+                isPlaying = false;
+
+
+                btnText.innerText =
+                    'Play My Song';
+
+
+                btnIcon.className =
+                    'fa-solid fa-music text-rose-400';
+
+            }
+
+        }
+
+
+        /* =========================================================
+           PAGE INITIALIZATION
+        ========================================================== */
+
+        window.addEventListener(
+            'load',
+            function() {
+
+                init3D();
+
+                animate3D();
+
+                updateCountdown();
+
+            }
+        );
+
+
+        setInterval(
+            updateCountdown,
+            1000
+        );
+
+    </script>
+
+</body>
+</html>
